@@ -1,2 +1,4 @@
-# decentralized_instagram
-A decentralized social media application like instagram, built on Ethereum Blockchain network.
+# Decentralized Instagram
+
+A decentralized social media application like instagram which has been built on Ethereum Blockchain network using Solidity and React.Js.
+
