@@ -17,15 +17,19 @@ const style = {
         height: "100vh"
     },
     image:{
-        maxWidth: "400px",
-        maxheight:" 400px",
+        maxWidth: "300px",
+        maxheight:" 300px",
         display:"block",
         overflow:"hidden",
-        margin:"0.3rem"
+        margin:"0.3rem",
     },
     img :{
-        maxWidth: "100%",
-        maxHeight: "100%"
+        width: "100%",
+        height: "100%",
+        position: "relative",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%,-50%)"
     },
     msg:{
         fontSize:"1.6rem"

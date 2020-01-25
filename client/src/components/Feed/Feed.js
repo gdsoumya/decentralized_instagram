@@ -67,14 +67,14 @@ export default function Feed(props) {
                     })
                 }
             }
-            if(p!=null)
+            if(p.length!==0)
                 setData(p);
             else
                 setData("");
             setFollowing(follow);
         }
         contract.events.NewPost({
-            filter:{target: following},
+            filter:{author: following},
             fromBlock:'latest'
           })
           .on('data',function(event){
@@ -120,9 +120,9 @@ export default function Feed(props) {
     if(data==null)
         return loader();
     else if(data==="")
-        return(
+            return(
             <div className={classes.container}>
-                <button style={{display:newPost.length?"block":"none"}} onClick={refresh} className={classes.newPost}>New Post</button>
+                <button style={{display:newPost.length?"block":"none"}} onClick={refresh} className={classes.newPost}>New Posts</button>
                 <p className={classes.info}>No Feed Found<br/>Follow Others To view their Posts</p>
             </div>
         )

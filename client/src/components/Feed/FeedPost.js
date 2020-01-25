@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -29,14 +30,17 @@ const useStyles = makeStyles(theme => ({
       color:"black",
       fontWeight:"bold",
   },
-  textCenter:{
+  caption:{
     color:"black",
-    textAlign:"center"
+    margin: "0.3rem 0rem 1rem 1rem"
   },
   likes:{
     fontWeight:"bold",
-    margin:"-0.5rem 0rem 1rem 1rem",
+    margin:"-0.5rem 0rem 0rem 1rem",
     color:"black"
+  },
+  link:{
+    textDecoration:"none"
   }
 }));
 
@@ -87,19 +91,16 @@ const FeedPost=(props) =>{
         //     <MoreVertIcon />
         //   </IconButton>
         // }
-        title={<span className={classes.text}>{name}</span>}
+        title={<Link className={classes.link} to={`/profile/${acc}`}><span className={classes.text}>{name}</span></Link>}
         // subheader={date}
       />
       <CardMedia
         className={classes.media}
         image={`https://ipfs.infura.io/ipfs/${img}`}
-        title="Paella dish"
+        title={content}
       />
-      <CardContent>
-        <Typography className={classes.textCenter} variant="body2" color="textSecondary" component="p">
-          {content}
-        </Typography>
-      </CardContent>
+      {/* <CardContent>
+      </CardContent> */}
       <CardActions disableSpacing>
         <IconButton style={{color:color}} onClick={like} aria-label="add to favorites">
           <FavoriteIcon />
@@ -111,6 +112,9 @@ const FeedPost=(props) =>{
       <Typography className={classes.likes} variant="body2" color="textSecondary" component="p">
           {likes}
       </Typography>
+      <Typography className={classes.caption} variant="body2" color="textSecondary" component="p">
+      <Link className={classes.link} to={`/profile/${acc}`}><strong>{name}</strong></Link> {content}
+        </Typography>
     </Card>
   );
 }

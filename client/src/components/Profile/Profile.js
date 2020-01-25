@@ -32,29 +32,47 @@ class Profile extends Component {
         uname:null,
         followers:null,
         following:null,
-        posts:null,
+        posts:[],
     }
-
+    
     constructor(props){
         super(props);
+        this.blocks=[""];
         this.account = this.props.data.account;
         this.contract = this.props.data.contract;
         this.getUserData(this.props.match.params.id);
     }
     componentDidMount() {
+        console.log(this.state.posts)
         window.scrollTo(0, 0);
+        this.contract.events.NewPost({
+            filter:{author: [this.props.match.params.id]},
+            fromBlock:'latest'
+          })
+          .on('data',(event)=>{
+            if(this.blocks.includes(event.blockNumber))
+                return;
+            this.blocks.push(event.blockNumber);
+            console.log(this.state.posts)
+            let p=this.state.posts;
+            this.contract.methods.getPost(event.returnValues.author,event.returnValues.id).call().then(post=>{
+                p[0].push(post[0]);
+                p[1].push(post[1]);
+                this.setState({posts:p});
+            })
+        })
+
     }
     UNSAFE_componentWillReceiveProps(nextProps){
         if (nextProps.match.params.id !== this.props.match.params.id)
             this.getUserData(nextProps.match.params.id);
      }
     getUserData= async(id)=>{
-        // console.log("hello")
+        this.setState({id:null,uname:null,followers:null,following:null,posts:[]});
         const name = await this.contract.methods.getUser(id).call();
         const followers = await this.contract.methods.getFollowers(id).call();
         const following = await this.contract.methods.getFollowing(id).call();
         const posts = await this.contract.methods.getAllPost(id).call();
-        // console.log(name,followers,following,posts)
         this.setState({id:id,uname:name[1],followers:followers,following:following,posts:posts});
     }
     loader=()=>{
