@@ -5,11 +5,11 @@
   "dependencies": {
     "@material-ui/core": "^4.8.2",
     "@material-ui/icons": "^4.5.1",
-    "ipfs-http-client": "^40.2.1",
+    "ipfs-http-client": "^60.0.1",
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "5.0.1",
     "web3": "1.2.2"
   },
   "scripts": {
